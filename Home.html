@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="Images/GNSquare.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameNow</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .form-control::placeholder {
+        color: #868686;
+        opacity: 1;
+      }
+      .form-control:focus {
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .scroll-container {
+        display: grid;
+        grid-auto-flow: column;
+        gap: 1.25rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .scroll-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .game-card {
+        width: 320px;
+        height: 360px;
+        border-radius: 16px;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        overflow: hidden;
+      }
+
+      .game-card-content {
+        width: 212px;
+        height: 108px;
+        color: #eeeeee;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+      }
+
+      .badge {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        height: 24px;
+        border-radius: 16px;
+        padding: 0 0.5rem;
+        color: #ebebeb;
+        justify-content: space-evenly;
+        font-size: 0.875rem;
+      }
+
+      .btn-play {
+        width: 207px;
+        height: 40px;
+        font-size: 0.875rem;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #5efc8d;
+        color: #000000;
+        border: none;
+        cursor: pointer;
+      }
+
+      @media (min-width: 576px) {
+        .game-card {
+          width: 360px;
+          height: 202.5px;
+        }
+
+        .game-card-content {
+          margin-bottom: 1rem;
+        }
+      }
+
+      .banner-container {
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .banner-image {
+        display: block;
+        margin: 70px auto;
+        cursor: pointer;
+        border-radius: 1.5rem;
+        object-fit: cover;
+        width: 95%;
+        height: 160px;
+      }
+
+      @media (max-width: 768px) {
+        .banner-image {
+          height: 120px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .banner-image {
+          height: 100px;
+        }
+      }
+      div::-webkit-scrollbar {
+        display: none;
+      }
+      button:focus {
+        outline: 2px solid #5efc8d;
+      }
+      
+    </style>
+  </head>
+  <body style="background-color: #121212">
+    <div class="container-fluid">
+      <div class="row h-full manage-height">
+        <div class="col-12 col-md-4"></div>
+
+        <div
+          class="col-12 col-md-4 d-flex flex-column px-3"
+          style="background-color: #121212"
+        >
+          <div
+            class="d-flex align-items-center justify-content-between px-1 px-sm-4 px-lg-4 h-100 text-secondary sticky-top"
+            style="height: 4rem; min-height: 4rem; background-color: #1f1f1f"
+          >
+            <div class="d-flex align-items-center cursor-pointer">
+              <a href="Home.html"><img
+                class="img-fluid"
+                src="/images/download.png"
+                alt="Icon 1"
+                style="width: 26px; height: 24px"
+              /></a>
+            </div>
+            <div class="d-flex align-items-center cursor-pointer">
+              <img
+                class="img-fluid"
+                src="/images/heart.png"
+                alt="Icon 2"
+                style="width: 26px; height: 24px"
+              />
+            </div>
+            <div class="d-flex align-items-center cursor-pointer">
+              <img
+                class="img-fluid"
+                src="/images/gem.png"
+                alt="Icon 3"
+                style="width: 26px; height: 24px"
+              />
+            </div>
+            <div class="d-flex align-items-center cursor-pointer">
+              <img
+                class="img-fluid"
+                src="/images/coin.png"
+                alt="Icon 4"
+                style="width: 26px; height: 24px"
+              />
+            </div>
+          </div>
+          <div class="flex-grow">
+            <div class="sticky-top" style="z-index: 1000;">
+              <div
+                class="d-flex align-items-center justify-content-between"
+                style="background-color: #292a2c; height: 90px; top: 0; position: sticky; background-color: transparent;"
+              >
+                <div
+                  class="bg-dark d-flex align-items-center rounded-pill"
+                  style="height: 54px; width: 80%; background-color: transparent;"
+                >
+                 <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ms-3"
+                  >
+                    <path
+                      d="M14.6667 16L9.80952 11.1429C9.33333 11.5238 8.78571 11.8254 8.16667 12.0476C7.54762 12.2698 6.88889 12.381 6.19048 12.381C4.46032 12.381 2.99603 11.7817 1.79762 10.5833C0.599206 9.38492 0 7.92063 0 6.19048C0 4.46032 0.599206 2.99603 1.79762 1.79762C2.99603 0.599206 4.46032 0 6.19048 0C7.92063 0 9.38492 0.599206 10.5833 1.79762C11.7817 2.99603 12.381 4.46032 12.381 6.19048C12.381 6.88889 12.2698 7.54762 12.0476 8.16667C11.8254 8.78571 11.5238 9.33333 11.1429 9.80952L16 14.6667L14.6667 16ZM6.19048 10.4762C7.38095 10.4762 8.39286 10.0595 9.22619 9.22619C10.0595 8.39286 10.4762 7.38095 10.4762 6.19048C10.4762 5 10.0595 3.98809 9.22619 3.15476C8.39286 2.32143 7.38095 1.90476 6.19048 1.90476C5 1.90476 3.9881 2.32143 3.15476 3.15476C2.32143 3.98809 1.90476 5 1.90476 6.19048C1.90476 7.38095 2.32143 8.39286 3.15476 9.22619C3.9881 10.0595 5 10.4762 6.19048 10.4762Z"
+                      fill="#868686"
+                    ></path>
+                  </svg>
+                  <input
+                    class="form-control border-0 bg-dark text-secondary ms-3"
+                    type="text"
+                    placeholder="Search for games"
+                    style="width: 85%;"
+                  />
+                </div>
+            
+                <div
+                  class="bg-dark d-flex align-items-center justify-content-center rounded-pill"
+                  style="height: 54px; width: 17%; cursor: pointer;"
+                >
+                <a href="filters.html"> <svg
+                    width="19"
+                    height="18"
+                    viewBox="0 0 19 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15.25 17.25C14.2 17.25 13.3125 16.8875 12.5875 16.1625C11.8625 15.4375 11.5 14.55 11.5 13.5C11.5 12.45 11.8625 11.5625 12.5875 10.8375C13.3125 10.1125 14.2 9.75 15.25 9.75C16.3 9.75 17.1875 10.1125 17.9125 10.8375C18.6375 11.5625 19 12.45 19 13.5C19 14.55 18.6375 15.4375 17.9125 16.1625C17.1875 16.8875 16.3 17.25 15.25 17.25ZM15.25 15.25C15.7333 15.25 16.1458 15.0792 16.4875 14.7375C16.8292 14.3958 17 13.9833 17 13.5C17 13.0167 16.8292 12.6042 16.4875 12.2625C16.1458 11.9208 15.7333 11.75 15.25 11.75C14.7667 11.75 14.3542 11.9208 14.0125 12.2625C13.6708 12.6042 13.5 13.0167 13.5 13.5C13.5 13.9833 13.6708 14.3958 14.0125 14.7375C14.3542 15.0792 14.7667 15.25 15.25 15.25ZM1.5 14.5V12.5H9.5V14.5H1.5ZM3.75 8.25C2.7 8.25 1.8125 7.8875 1.0875 7.1625C0.3625 6.4375 0 5.55 0 4.5C0 3.45 0.3625 2.5625 1.0875 1.8375C1.8125 1.1125 2.7 0.75 3.75 0.75C4.8 0.75 5.6875 1.1125 6.4125 1.8375C7.1375 2.5625 7.5 3.45 7.5 4.5C7.5 5.55 7.1375 6.4375 6.4125 7.1625C5.6875 7.8875 4.8 8.25 3.75 8.25ZM3.75 6.25C4.23333 6.25 4.64583 6.07917 4.9875 5.7375C5.32917 5.39583 5.5 4.98333 5.5 4.5C5.5 4.01667 5.32917 3.60417 4.9875 3.2625C4.64583 2.92083 4.23333 2.75 3.75 2.75C3.26667 2.75 2.85417 2.92083 2.5125 3.2625C2.17083 3.60417 2 4.01667 2 4.5C2 4.98333 2.17083 5.39583 2.5125 5.7375C2.85417 6.07917 3.26667 6.25 3.75 6.25ZM9.5 5.5V3.5H17.5V5.5H9.5Z"
+                      fill="#868686"
+                    ></path>
+                  </svg> </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="w-100 mt-4 scroll-container">
+              <div
+                class="game-card"
+                style="
+                  background-image: linear-gradient(
+                      to right bottom,
+                      rgba(0, 0, 0, 0.16),
+                      rgba(0, 0, 0, 0.64)
+                    ),
+                    url('https://gnplay.cricvids.co/assets/games/apkscreenshots/Punchy-GuyBanner.png');
+                "
+              >
+                <div class="game-card-content">
+                  <div class="badge" style="background-color: #3f70bc">
+                    <svg
+                      width="15"
+                      height="14"
+                      viewBox="0 0 15 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.83325 9.66671H8.16658V7.66671H10.1666V6.33337H8.16658V4.33337H6.83325V6.33337H4.83325V7.66671H6.83325V9.66671ZM7.49992 13.6667C7.32214 13.6667 7.1527 13.6362 6.99159 13.575C6.83047 13.5139 6.68881 13.4167 6.56659 13.2834L1.24992 7.95004C1.1277 7.81671 1.0277 7.66948 0.949919 7.50837C0.872141 7.34726 0.833252 7.17782 0.833252 7.00004C0.833252 6.82226 0.872141 6.65282 0.949919 6.49171C1.0277 6.3306 1.1277 6.18893 1.24992 6.06671L6.56659 0.733374C6.69992 0.600041 6.84436 0.500041 6.99992 0.433374C7.15547 0.366707 7.32214 0.333374 7.49992 0.333374C7.6777 0.333374 7.84992 0.366707 8.01659 0.433374C8.18325 0.500041 8.3277 0.600041 8.44992 0.733374L13.7499 6.06671C13.8721 6.20004 13.9721 6.34448 14.0499 6.50004C14.1277 6.6556 14.1666 6.82226 14.1666 7.00004C14.1666 7.17782 14.1305 7.34726 14.0583 7.50837C13.986 7.66948 13.8833 7.81671 13.7499 7.95004L8.44992 13.2834C8.3277 13.4056 8.18325 13.5 8.01659 13.5667C7.84992 13.6334 7.6777 13.6667 7.49992 13.6667ZM7.49992 12.3334L12.8166 7.00004L7.49992 1.66671L2.18325 7.00004L7.49992 12.3334Z"
+                        fill="white"
+                      ></path>
+                    </svg>
+                    <span>New Game</span>
+                  </div>
+                  <span class="text-truncate" style="font-size: 1.25rem"
+                    >Punchy Champs: Tap &amp; Punch</span
+                  >
+                  <button class="btn-play">Play Now</button>
+                </div>
+              </div>
+
+              <div
+                class="game-card"
+                style="
+                  background-image: linear-gradient(
+                      to right bottom,
+                      rgba(0, 0, 0, 0.16),
+                      rgba(0, 0, 0, 0.64)
+                    ),
+                    url('https://gnplay.cricvids.co/assets/banners/FreeFire-Monthly-Banner+3.png');
+                "
+              ></div>
+
+              <div
+                class="game-card"
+                style="
+                  background-image: linear-gradient(
+                      to right bottom,
+                      rgba(0, 0, 0, 0.16),
+                      rgba(0, 0, 0, 0.64)
+                    ),
+                    url('https://gnplay.cricvids.co/assets/homeBanners/ludo-tournament.png');
+                "
+              >
+                <div class="game-card-content">
+                  <div class="badge" style="background-color: #2a610b">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2.66667 12V10.6667H5.33333V8.6C4.78889 8.47778 4.30278 8.24722 3.875 7.90833C3.44722 7.56944 3.13333 7.14444 2.93333 6.63333C2.1 6.53333 1.40278 6.16944 0.841667 5.54167C0.280556 4.91389 0 4.17778 0 3.33333V2.66667C0 2.3 0.130556 1.98611 0.391667 1.725C0.652778 1.46389 0.966667 1.33333 1.33333 1.33333H2.66667V0H9.33333V1.33333H10.6667C11.0333 1.33333 11.3472 1.46389 11.6083 1.725C11.8694 1.98611 12 2.3 12 2.66667V3.33333C12 4.17778 11.7194 4.91389 11.1583 5.54167C10.5972 6.16944 9.9 6.53333 9.06667 6.63333C8.86667 7.14444 8.55278 7.56944 8.125 7.90833C7.69722 8.24722 7.21111 8.47778 6.66667 8.6V10.6667H9.33333V12H2.66667ZM2.66667 5.2V2.66667H1.33333V3.33333C1.33333 3.75556 1.45556 4.13611 1.7 4.475C1.94444 4.81389 2.26667 5.05556 2.66667 5.2ZM6 7.33333C6.55556 7.33333 7.02778 7.13889 7.41667 6.75C7.80556 6.36111 8 5.88889 8 5.33333V1.33333H4V5.33333C4 5.88889 4.19444 6.36111 4.58333 6.75C4.97222 7.13889 5.44444 7.33333 6 7.33333ZM9.33333 5.2C9.73333 5.05556 10.0556 4.81389 10.3 4.475C10.5444 4.13611 10.6667 3.75556 10.6667 3.33333V2.66667H9.33333V5.2Z"
+                        fill="white"
+                      ></path>
+                    </svg>
+                    <span>Tournament</span>
+                  </div>
+                  <span class="text-truncate" style="font-size: 1.25rem"
+                    >Ludo Masters</span
+                  >
+                  <button class="btn-play">Play</button>
+                </div>
+              </div>
+
+              <div
+                class="game-card"
+                style="
+                  background-image: linear-gradient(
+                      to right bottom,
+                      rgba(0, 0, 0, 0.16),
+                      rgba(0, 0, 0, 0.64)
+                    ),
+                    url('https://gnplay.cricvids.co/assets/homeBanners/banner_voucher.gif');
+                "
+              >
+                <div class="game-card-content">
+                  <div class="badge" style="background-color: #3f70bc">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-[15px] h-[15px]"
+                    >
+                      <path
+                        d="M8.73105 14.6689L11.9977 12.2189L15.2061 14.6689L13.9811 10.7023L17.2477 8.13561H13.2811L11.9977 4.16895L10.7144 8.13561H6.74772L9.95605 10.7023L8.73105 14.6689ZM2.66439 19.3356C2.02272 19.3356 1.47342 19.1071 1.01647 18.6502C0.559527 18.1933 0.331055 17.6439 0.331055 17.0023V13.0648C0.331055 12.8509 0.39911 12.6662 0.535221 12.5106C0.671332 12.3551 0.846332 12.2578 1.06022 12.2189C1.52689 12.0634 1.91092 11.7814 2.2123 11.3731C2.51369 10.9648 2.66439 10.5078 2.66439 10.0023C2.66439 9.49672 2.51369 9.03978 2.2123 8.63145C1.91092 8.22311 1.52689 7.94117 1.06022 7.78561C0.846332 7.74672 0.671332 7.6495 0.535221 7.49395C0.39911 7.33839 0.331055 7.15367 0.331055 6.93978V3.00228C0.331055 2.36061 0.559527 1.81131 1.01647 1.35436C1.47342 0.897418 2.02272 0.668945 2.66439 0.668945H21.3311C21.9727 0.668945 22.522 0.897418 22.979 1.35436C23.4359 1.81131 23.6644 2.36061 23.6644 3.00228V6.93978C23.6644 7.15367 23.5963 7.33839 23.4602 7.49395C23.3241 7.6495 23.1491 7.74672 22.9352 7.78561C22.4686 7.94117 22.0845 8.22311 21.7831 8.63145C21.4817 9.03978 21.3311 9.49672 21.3311 10.0023C21.3311 10.5078 21.4817 10.9648 21.7831 11.3731C22.0845 11.7814 22.4686 12.0634 22.9352 12.2189C23.1491 12.2578 23.3241 12.3551 23.4602 12.5106C23.5963 12.6662 23.6644 12.8509 23.6644 13.0648V17.0023C23.6644 17.6439 23.4359 18.1933 22.979 18.6502C22.522 19.1071 21.9727 19.3356 21.3311 19.3356H2.66439ZM2.66439 17.0023H21.3311V14.0273C20.6116 13.5995 20.0429 13.0308 19.6248 12.321C19.2067 11.6113 18.9977 10.8384 18.9977 10.0023C18.9977 9.16617 19.2067 8.39325 19.6248 7.68353C20.0429 6.97381 20.6116 6.40506 21.3311 5.97728V3.00228H2.66439V5.97728C3.38383 6.40506 3.95258 6.97381 4.37064 7.68353C4.78869 8.39325 4.99772 9.16617 4.99772 10.0023C4.99772 10.8384 4.78869 11.6113 4.37064 12.321C3.95258 13.0308 3.38383 13.5995 2.66439 14.0273V17.0023Z"
+                        fill="#EEEEEE"
+                      ></path>
+                    </svg>
+                    <span>Voucher Home</span>
+                  </div>
+                  <button class="btn-play">Purchase</button>
+                </div>
+              </div>
+            </div>
+            <div class="banner-container">
+              <img
+                class="banner-image"
+                src="/images/Steak-Banner-3+2.png"
+                alt="Banner Image"
+                loading="lazy"
+              />
+            </div>
+            <div
+              class="w-100 text-light"
+              style="
+                width: 95%;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div
+                class="d-flex align-items-center justify-content-start w-100 ps-3 ps-sm-0"
+              >
+                <span class="text-body-large mr-2"> Recomended Games</span>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                fill="currentColor"
+                class="bi bi-arrow-right-short"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="d-flex gap-3"
+              style="
+                height: 150px;
+                max-width: 700px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space: nowrap;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+              "
+            >
+              <img class="rounded-3xl" src="Images/Gago-Ludo.png" alt="icon" style="width: 160px; height: 160px;"/>
+              
+              <img class="rounded-3xl" src="Images/Pool-2.webp" alt="icon" style="width: 160px; height: 160px;"/>
+              <img
+                class="rounded-3xl"
+                src="Images/Jump+Kitty.webp"
+                alt="icon"
+                style="width: 160px; height: 160px;"/>
+              <img
+                class="rounded-3xl"
+                src="Images/Dunk-masters.webp"
+                alt="icon"
+                style="width: 160px; height: 160px;" />
+            </div>
+            <div
+            class="d-flex flex-column align-items-start justify-content-between w-100"
+            >
+            <div
+            class="w-100 text-light mt-4"
+            style="
+              width: 95%;
+              height: 24px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <div
+              class="d-flex align-items-center justify-content-start w-100 ps-3 ps-sm-0"
+            >
+              <span class="text-body-large mr-2"> Multiplayer Games <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="18" height="18" fill="url(#pattern0_1729_764)"></rect><defs><pattern id="pattern0_1729_764" patternContentUnits="objectBoundingBox" width="1" height="1"><use xlink:href="#image0_1729_764" transform="scale(0.015625)"></use></pattern><image id="image0_1729_764" width="64" height="64" xlink:href="data:image/png;base64,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"></image></defs></svg></span>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="currentColor"
+              class="bi bi-arrow-right-short"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+              />
+            </svg>
+           
+            </div>
+
+            <div class="d-flex flex-row mt-4 mt-sm-3 overflow-x-auto overflow-y-hidden w-100" style="gap: 20px; scroll-behavior: smooth;">
+            
+              <div>
+                  <div class="d-flex flex-column align-items-center justify-content-between mt-3" style="width: 360px; height: 205px; cursor: pointer; overflow: hidden;">
+                      <img
+                          class="rounded-lg"
+                          style="object-fit: cover; width: 360px; height: 205px; border-radius: 16px;"  
+                          src="/Images/Hidden+Objects+250x250.webp"
+                          alt="icon"
+                      />
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between w-100 mt-3" style="height: 44px; color: var(--text-primary);">
+                      <div class="d-flex flex-column align-items-start justify-content-between" style="width: 303px; height: 100%;">
+                          <span class="fs-6 mb-1 text-light">Hidden Objects</span>
+                          <ul class="d-flex align-items-center list-unstyled" style="width: 231px; font-size: 14px;">
+                              <li class="text" style="color: #5efc8d;">TF</li>
+                              <li class="d-flex align-items-center">
+                                  <span class="mx-1 text-light">.</span>
+                                  <span class="text-truncate text-light" style="max-width: 200px;">Puzzle</span>
+                              </li>
+                              <li class="d-flex align-items-center text-truncate" style="max-width: 200px;">
+                                  <span class="mx-1 text-light">.</span>
+                                  <span class="text-truncate text-light" style="max-width: 200px;">Arcade</span>
+                              </li>
+                              <li class="d-flex align-items-center text-truncate" style="max-width: 200px;">
+                                  <span class="mx-1 text-light">.</span>
+                                  <span class="text-truncate text-light" style="max-width: 200px;">Multiplayer</span>
+                              </li>
+                          </ul>
+                      </div>
+                      <button
+                          class="border border-success rounded-pill bg-transparent px-3 py-2"
+                          style="width: 58.53px; height: 34px; font-size: 12px; cursor: pointer; color: #5efc8d;"
+                      >
+                          Play
+                      </button>
+                  </div>
+              </div>
+                     
+              <div>
+                  <div class="d-flex flex-column align-items-center justify-content-between mt-3" style="gap: 20px; width: 360px; height: 205px; cursor: pointer; overflow: hidden;">
+                      <img
+                          class="rounded-lg"
+                          style="object-fit: cover; width: 360px; height: 205px; border-radius: 16px;"  
+                          src="/Images/Hexa+Gone+250x250.webp"
+                          alt="icon"
+                      />
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between w-100 mt-3" style="height: 44px; color: var(--text-primary);">
+                      <div class="d-flex flex-column align-items-start justify-content-between" style="width: 303px; height: 100%;">
+                          <span class="fs-6 mb-1 text-light">Hexa Gone</span>
+                          <ul class="d-flex align-items-center list-unstyled" style="width: 231px; font-size: 14px;">
+                              <li class="text" style="color: #5efc8d;">TF</li>
+                              <li class="d-flex align-items-center">
+                                  <span class="mx-1 text-light">.</span>
+                                  <span class="text-truncate text-light" style="max-width: 200px;">Puzzle</span>
+                              </li>
+                              <li class="d-flex align-items-center text-truncate" style="max-width: 200px;">
+                                  <span class="mx-1 text-light">.</span>
+                                  <span class="text-truncate text-light" style="max-width: 200px;">Arcade</span>
+                              </li>
+                              <li class="d-flex align-items-center text-truncate" style="max-width: 200px;">
+                                  <span class="mx-1 text-light">.</span>
+                                  <span class="text-truncate text-light" style="max-width: 200px;">Multiplayer</span>
+                              </li>
+                          </ul>
+                      </div>
+                      <button
+                          class="border border-success rounded-pill bg-transparent px-3 py-2"
+                          style="width: 58.53px; height: 34px; font-size: 12px; cursor: pointer; color: #5efc8d;"
+                      >
+                          Play
+                      </button>
+                  </div>
+              </div>
+                     
+              <div>
+                  <div class="d-flex flex-column align-items-center justify-content-between mt-3" style="gap: 20px; width: 360px; height: 205px; cursor: pointer; overflow: hidden;">
+                      <img
+                          class="rounded-lg"
+                          style="object-fit: cover; width: 360px; height: 205px; border-radius: 16px;"  
+                          src="/Images/Carrom+Kings+250x250.webp"
+                          alt="icon"
+                      />
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between w-100 mt-3" style="height: 44px; color: var(--text-primary);">
+                      <div class="d-flex flex-column align-items-start justify-content-between" style="width: 303px; height: 100%;">
+                          <span class="fs-6 mb-1 text-light">Carrom Kings</span>
+                          <ul class="d-flex align-items-center list-unstyled" style="width: 231px; font-size: 14px;">
+                              <li class="text" style="color: #5efc8d;">TF</li>
+                              <li class="d-flex align-items-center">
+                                  <span class="mx-1 text-light">.</span>
+                                  <span class="text-truncate text-light" style="max-width: 200px;">Puzzle</span>
+                              </li>
+                              <li class="d-flex align-items-center text-truncate" style="max-width: 200px;">
+                                  <span class="mx-1 text-light">.</span>
+                                  <span class="text-truncate text-light" style="max-width: 200px;">Arcade</span>
+                              </li>
+                              <li class="d-flex align-items-center text-truncate" style="max-width: 200px;">
+                                  <span class="mx-1 text-light">.</span>
+                                  <span class="text-truncate text-light" style="max-width: 200px;">Multiplayer</span>
+                              </li>
+                          </ul>
+                      </div>
+                      <button
+                          class="border border-success rounded-pill bg-transparent px-2 py-2"
+                          style="width: 58.53px; height: 34px; font-size: 12px; cursor: pointer; color: #5efc8d;"
+                      >
+                          Play
+                      </button>
+                  </div>
+              </div>
+          
+          </div>
+          
+          
+          
+            <div
+            class="w-100 text-light"
+            style="
+              width: 95%;
+              height: 100%px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+          <div
+          class="d-flex flex-column align-items-start justify-content-between w-100"
+          >
+          <div
+          class="w-100 text-light mt-4"
+          style="
+            width: 95%;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-start w-100 ps-3 ps-sm-0"
+          >
+            <span class="text-body-large mr-2"> Tap and Play Games <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.25 15.5L6.25 9.875L0.25 9.125L9.25 0.5H10.75L7.75 6.125L13.75 6.875L4.75 15.5H3.25Z" fill="#FF612F"></path></svg></span>
+          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            fill="currentColor"
+            class="bi bi-arrow-right-short"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+            />
+          </svg>
+          
+          </div>
+          <div class="container-fluid mt-5 mt-sm-3 overflow-auto ps-0 pe-0 d-grid gap-3 gap-sm-4" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr);">
+           
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/escape-from-aztec.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Escape from Aztec</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Action</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">3D</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/mini-golf-adventure.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Mini Golf Adventure</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Box2D</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Simulation</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+           
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/jumpee-land-3d.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Jumpee Land</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Simulation</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Animals</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+           
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/didi-and-friends-guess-what.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Didi Friends Guess What</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Girls</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Educational</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/snowboard-hero.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Snowboard Hero</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Simulation</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Sports</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/clash-of-vikings.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Clash of Vikings</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Board</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Cards</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/stack-the-pancake.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Stack The Pancakes</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Box2D</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Arcade</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+           
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/stack-the-burger.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Stack The Burgers</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Simulation</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Food</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/trixology-classic.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Trixology</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Arcade</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Puzzle</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+           
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/didi-and-friends-coloring-book.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Didi Friends Coloring Book</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Animals</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Junior</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+           
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/chef-slash.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Chef Slash</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Food</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Box2D</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="px-1" style="padding-right: 40px;">
+                <div class="w-100" style="max-width: 311px; height: 96px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <img class="rounded-2xl object-cover" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/catch-the-snacks.webp" alt="GameIcon" loading="lazy" style="width: 96px; height: 96px; border-radius: 16px; background-color: transparent; border: none;">
+                    <div class="d-flex flex-column align-items-start text-white px-0" style="width: 207px; height: 64px;">
+                        <span class="text-light fs-7 px-2">Catch The Snacks</span>
+                        <ul class="d-flex align-items-center w-100 list-unstyled px-2">
+                            <li style="color: #5efc8d;">GB</li>
+                            <li class="flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Arcade</span>
+                            </li>
+                            <li class="truncate flex items-center">
+                                <span class="mx-1">.</span>
+                                <span class="text-truncate">Brands</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="flex flex-col items-start justify-between w-100 mt-4 " style="height: 300px;">
+          <div class="w-[95%] h-[24px] flex items-center justify-between text-text-primary">
+            <div class="flex items-center justify-start w-full pl-5 ssm:pl-0">
+              <span class="text-lg mr-2">Game of the month</span>
+
+          </div>
+        </div>
+    <div class="d-flex gap-3 mt-3" style="overflow-x: auto; overflow-y: hidden; scroll-behavior: smooth; padding: 10px;">
+      
+      <div class="d-flex flex-column align-items-start justify-content-between" style="width: 224px; height: 198px; cursor: pointer;">
+          <div style="position: relative; width: 224px; height: 126px;">
+              <img class="rounded-2xl w-100 h-100 object-cover" 
+                   src="/Images/Gago-Ludo.png" 
+                   alt="GameIcon" 
+                   loading="lazy">
+          </div>
+          <div class="d-flex align-items-center justify-content-between" style="width: 213px; height: 56px;">
+              <img class="rounded " src="https://gnplay.cricvids.co/assets/games/icons/Gago-Ludo.webp" alt="GameIcon" loading="lazy" style="width: 56px; height: 56px;">
+              <div class="text-light d-flex flex-column align-items-start justify-content-between mt-4" style="width: 160px; height: 70px;">
+                  <span class="fs-5 text-truncate w-100">Ludo</span>
+                  <ul class="text-body-small w-100 d-flex align-items-center list-unstyled">
+                      <li style="color: #5EFC8D;">GB</li>
+                      <li class="d-flex align-items-center"><span class="mx-1">.</span>
+                          <span class="text-truncate fs-6">Board</span>
+                      </li>
+                      <li class="d-flex align-items-center"><span class="mx-1">.</span>
+                          <span class="text-truncate fs-6">Multiplayer</span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  
+     
+      <div class="d-flex flex-column align-items-start justify-content-between" style="width: 224px; height: 198px; cursor: pointer;">
+        <div style="position: relative; width: 224px; height: 126px;">
+          <img class="rounded-2xl w-100 h-100 object-cover" 
+               src="https://gnplay.cricvids.co/assets/games/thumbnail/pool_icon.webp" 
+               alt="GameIcon" 
+               loading="lazy" style="border-radius: 1rem;">
+      </div>
+      
+          <div class="d-flex align-items-center justify-content-between" style="width: 213px; height: 56px;">
+              <img class="rounded mt-2" src="https://gnplay.cricvids.co/assets/games/icons/Pool-2.webp" style="width: 50px; height: 56px;">
+              <div class="text-light d-flex flex-column align-items-start justify-content-between mt-4" style="width: 150px; height: 70px;">
+                  <span class="fs-5 text-truncate w-100">Pool</span>
+                  <ul class="text-body-small w-100 d-flex align-items-center list-unstyled">
+                      <li style="color: #5EFC8D;">GB</li>
+                      <li class="d-flex align-items-center"><span class="mx-1">.</span>
+                          <span class="text-truncate fs-6">Sports</span>
+                      </li>
+                      
+                  </ul>
+              </div>
+          </div>
+      </div>
+  
+     
+      <div class="d-flex flex-column align-items-start justify-content-between" style="width: 224px; height: 198px; cursor: pointer;">
+        <div style="position: relative; width: 224px; height: 126px;">
+          <img class="rounded-2xl w-100 h-100 object-cover" 
+          src="https://gnplay.cricvids.co/assets/marketJsGames/icons/bubble-invasion.webp" 
+               alt="GameIcon" 
+               loading="lazy" style="border-radius: 1rem;">
+      </div>
+          <div class="d-flex align-items-center justify-content-between" style="width: 213px; height: 56px;">
+              <img class="rounded" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/bubble-invasion.webp" alt="GameIcon" loading="lazy"style="width: 56px; height: 56px;">
+              <div class="text-light d-flex flex-column align-items-start justify-content-between mt-4" style="width: 150px; height: 70px; ">
+                  <span class="fs-5 text-truncate w-100">Bubble Invasion</span>
+                  <ul class="text-body-small w-100 d-flex align-items-center list-unstyled" style="font-size: 15px;">
+                      <li style="color: #5EFC8D;">GB</li>
+                      <li class="d-flex align-items-center"><span class="mx-1">.</span>
+                          <span class="text-truncate fs-6">Simulation</span>
+                      </li>
+                      <li class="d-flex align-items-center"><span class="mx-1">.</span>
+                          <span class="text-truncate fs-6">Casual</span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+     
+      
+      <div class="d-flex flex-column align-items-start justify-content-between" style="width: 224px; height: 198px; cursor: pointer;">
+        <div style="position: relative; width: 224px; height: 126px;">
+          <img class="rounded-2xl w-100 h-100 object-cover" 
+          src="https://gnplay.cricvids.co/assets/marketJsGames/icons/backgammon.webp"
+               alt="GameIcon" 
+               loading="lazy" style="border-radius: 1rem;">
+      </div>
+          <div class="d-flex align-items-center justify-content-between" style="width: 213px; height: 56px;">
+              <img class="rounded" src="https://gnplay.cricvids.co/assets/marketJsGames/icons/backgammon.webp" alt="GameIcon" loading="lazy" style="width: 56px; height: 56px;">
+              <div class="text-light d-flex flex-column align-items-start justify-content-between mt-4" style="width: 150px; height: 70px;">
+                  <span class="fs-5 text-truncate w-100">Ludo</span>
+                  <ul class="text-body-small w-100 d-flex align-items-center list-unstyled">
+                      <li style="color: #5EFC8D;">GB</li>
+                      <li class="d-flex align-items-center"><span class="mx-1">.</span>
+                          <span class="text-truncate fs-6">Strategy</span>
+                      </li>
+                      <li class="d-flex align-items-center"><span class="mx-1">.</span>
+                          <span class="text-truncate fs-6">Board</span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  
+      
+      <div class="d-flex flex-column align-items-start justify-content-between" style="width: 224px; height: 198px; cursor: pointer;">
+        <div style="position: relative; width: 224px; height: 126px;">
+          <img class="rounded-2xl w-100 h-100 object-cover" 
+          src="https://gnplay.cricvids.co/assets/games/icons/Carrom+Kings+250x250.webp"
+               alt="GameIcon" 
+               loading="lazy" style="border-radius: 1rem;">
+      </div>
+          <div class="d-flex align-items-center justify-content-between" style="width: 213px; height: 56px;">
+              <img class="rounded" src="https://gnplay.cricvids.co/assets/games/icons/Carrom+Kings+250x250.webp" alt="GameIcon" loading="lazy" style="width: 56px; height: 56px;">
+              <div class="text-light d-flex flex-column align-items-start justify-content-between mt-4" style="width: 150px; height: 70px;">
+                  <span class="fs-5 text-truncate w-100">Ludo</span>
+                  <ul class="text-body-small w-100 d-flex align-items-center list-unstyled">
+                      <li style="color: #5EFC8D;">TF</li>
+                      <li class="d-flex align-items-center"><span class="mx-1">.</span>
+                          <span class="text-truncate fs-6">Casual</span>
+                      </li>
+                      <li class="d-flex align-items-center"><span class="mx-1">.</span>
+                          <span class="text-truncate fs-6">Strategy</span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+</div>
+
+      </div>
+      
+      
+          
+          </div>
+          <div class="d-flex flex-column align-items-start justify-content-between w-100">
+            <div class="w-[95%] h-[24px] flex items-center justify-between text-text-primary">
+              <div class="flex items-center justify-start w-full pl-5 ssm:pl-0">
+                <span class="text-lg mr-2 text-light">Videos on Demand</span>
+    
+            </div>
+          </div>
+          <div class="w-100 mt-5 mt-sm-3 d-grid" 
+          style="grid-auto-flow: column; overflow-x: auto; scroll-behavior: smooth; padding-left: 20px; grid-template-rows: repeat(1, auto); gap: 20px; -ms-overflow-style: none; scrollbar-width: none;">
+      
+       <div>
+         <div class="d-flex flex-column align-items-center justify-content-between bg-primary rounded" 
+              style="width: 360px; height: 205px; cursor: pointer; overflow: hidden; border-radius: 15px;">
+         <a href="vid1.html">  <img class="w-100 h-100" 
+                src="https://gnplay.cricvids.co/assets/images/217-How+to+do+tunneling+in+fortnite.webp" 
+                alt="Icon" 
+                loading="lazy" 
+                style="object-fit: cover; border-radius: inherit;"> </a>
+         </div>
+         <div class="d-flex align-items-center mb-3 gap-3 mt-3" style="width: 100%; height: auto;">
+           <img class="rounded" src="/Images/user.png" alt="Icon" loading="lazy" style="width: 56px; height: 56px; object-fit: cover;">
+           <div class="d-flex flex-column align-items-start justify-content-between" style="width: 219px; height: auto;">
+             <span class="text-light text-truncate" style="font-size: 1rem; white-space: nowrap;">How to do tunneling in fortnite</span>
+             <ul class="d-flex align-items-center gap-3 w-100 text-muted list-unstyled" style="font-size: 0.875rem;">
+               <li style="color: #5EFC8D; font-size: small;">GameWorld</li>
+               <li class="text-secondary" style="font-size: small;">.2 days ago</li>
+             </ul>
+             <span class="small text-secondary" style="margin-top: -13px;">Fortnite</span>
+           </div>
+         </div>
+       </div>
+     
+      
+       <div>
+         <div class="d-flex flex-column align-items-center justify-content-between bg-primary rounded" 
+              style="width: 360px; height: 205px; cursor: pointer; overflow: hidden; border-radius: 15px;">
+         <a href="vid2.html">  <img class="w-100 h-100" 
+           src="https://gnplay.cricvids.co/assets/images/219-How+to+jump+and+shoot.webp" 
+                alt="Icon" 
+                loading="lazy" 
+                style="object-fit: cover; border-radius: inherit;"> </a>
+         </div>
+         <div class="d-flex align-items-center mb-3 gap-3 mt-3" style="width: 100%; height: auto;">
+           <img class="rounded" src="/Images/user.png" alt="Icon" loading="lazy" style="width: 56px; height: 56px; object-fit: cover;">
+           <div class="d-flex flex-column align-items-start justify-content-between" style="width: 219px; height: auto;">
+             <span class="text-light text-truncate" style="font-size: 1rem; white-space: nowrap;">How to jump and shoot</span>
+             <ul class="d-flex align-items-center gap-3 w-100 text-muted list-unstyled" style="font-size: 0.875rem;">
+               <li style="color: #5EFC8D; font-size: small;">GameWorld</li>
+               <li class="text-secondary" style="font-size: small;">.2 days ago</li>
+             </ul>
+             <span class="small text-secondary" style="margin-top: -13px;">Fortnite</span>
+           </div>
+         </div>
+       </div>
+     
+       
+       <div>
+         <div class="d-flex flex-column align-items-center justify-content-between bg-primary rounded" 
+              style="width: 360px; height: 205px; cursor: pointer; overflow: hidden; border-radius: 15px;">
+         <a href="vid1.html">  <img class="w-100 h-100" 
+           src="https://gnplay.cricvids.co/assets/images/218-Efficient+Resource+Gathering.webp" 
+                alt="Icon" 
+                loading="lazy" 
+                style="object-fit: cover; border-radius: inherit;">  </a>
+         </div>
+         <div class="d-flex align-items-center mb-3 gap-3 mt-3" style="width: 100%; height: auto;">
+           <img class="rounded" src="/Images/user.png" alt="Icon" loading="lazy" style="width: 56px; height: 56px; object-fit: cover;">
+           <div class="d-flex flex-column align-items-start justify-content-between" style="width: 219px; height: auto;">
+             <span class="text-light text-truncate" style="font-size: 1rem; white-space: nowrap;">Efficient Recource Gathering</span>
+             <ul class="d-flex align-items-center gap-3 w-100 text-muted list-unstyled" style="font-size: 0.875rem;">
+               <li style="color: #5EFC8D; font-size: small;">GameWorld</li>
+               <li class="text-secondary" style="font-size: small;">.2 days ago</li>
+             </ul>
+             <span class="small text-secondary" style="margin-top: -13px;">Fortnite</span>
+           </div>
+         </div>
+       </div>
+     
+       
+       <div>
+         <div class="d-flex flex-column align-items-center justify-content-between bg-primary rounded" 
+              style="width: 360px; height: 205px; cursor: pointer; overflow: hidden; border-radius: 15px;">
+         <a href="vid2.html">  <img class="w-100 h-100" 
+           src="https://gnplay.cricvids.co/assets/images/220-Mastering+Building+Techniques+in+Fortnite.webp" 
+                alt="Icon" 
+                loading="lazy" 
+                style="object-fit: cover; border-radius: inherit;"> </a>
+         </div>
+         <div class="d-flex align-items-center mb-3 gap-3 mt-3" style="width: 100%; height: auto;">
+           <img class="rounded" src="/Images/user.png" alt="Icon" loading="lazy" style="width: 56px; height: 56px; object-fit: cover;">
+           <div class="d-flex flex-column align-items-start justify-content-between" style="width: 219px; height: auto;">
+             <span class="text-light text-truncate" style="font-size: 1rem; white-space: nowrap;">Mastering Building Techniques in Fortnite</span>
+             <ul class="d-flex align-items-center gap-3 w-100 text-muted list-unstyled" style="font-size: 0.875rem;">
+               <li style="color: #5EFC8D; font-size: small;">GameWorld</li>
+               <li class="text-secondary" style="font-size: small;">.2 days ago</li>
+             </ul>
+             <span class="small text-secondary" style="margin-top: -13px;">Fortnite</span>
+           </div>
+         </div>
+       </div>
+     </div>
+     
+            
+          </div>
+       <div class="d-flex flex-column align-items-start justify-content-between w-100">
+        <div
+        class="w-100 text-light"
+        style="
+          width: 95%;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        "
+      >
+        <div
+          class="d-flex align-items-center justify-content-start w-100 ps-3 ps-sm-0"
+        >
+          <span class="text-body-large mr-2"> Buy Vouchers</span>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          fill="currentColor"
+          class="bi bi-arrow-right-short"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+          />
+        </svg>
+      </div>
+      <div class="w-100 mt-7 mt-sm-5 d-flex overflow-auto scroll-smooth p-0 gap-5">
+        <div class="m-auto">
+          <div class="w-100 d-flex flex-column align-items-center justify-content-between cursor-pointer" style="width: 160px; height: 160px;">
+            <div style="width: 160px;"></div>
+            <img class="rounded-4" src="https://gnplay.cricvids.co/assets/vouchers/Arena+breakout+Poster.webp" alt="Icon" loading="lazy" style="width: 160px; height: 160px; object-fit: cover;">
+
+
+          </div>
+        </div>
+        <div class="m-auto">
+          <div class="w-100 d-flex flex-column align-items-center justify-content-between cursor-pointer" style="width: 160px; height: 160px;">
+            <div style="width: 160px;"></div>
+            <img class="rounded-4" src="https://gnplay.cricvids.co/assets/vouchers/BIGO+Poster.webp"alt="Icon" loading="lazy" style="width: 160px; height: 160px; object-fit: cover;">
+
+
+          </div>
+        </div>
+        <div class="m-auto">
+          <div class="w-100 d-flex flex-column align-items-center justify-content-between cursor-pointer" style="width: 160px; height: 160px;">
+            <div style="width: 160px;"></div>
+            <img class="rounded-4" src="https://gnplay.cricvids.co/assets/vouchers/PUBGPoster.webp" alt="Icon" loading="lazy" style="width: 160px; height: 160px; object-fit: cover;">
+
+
+          </div>
+        </div>
+
+      </div>
+      
+        <div class="bg-secondary text-white d-flex justify-content-around align-items-center h-100 w-100 sticky-bottom zindex-10"
+        >
+      </div>
+      
+      </div>
+      
+        </div>
+        
+
+        <div class="col-12 col-md-4"></div>
+      </div>
+      <div class="d-flex w-100 align-items-center justify-content-between px-1 px-sm-4 px-lg-4 h-100 text-secondary sticky-bottom mt-5" style="height: 4rem; min-height: 4rem; background-color: #1F1F1F">
+
+        <a class="d-flex flex-column align-items-center"
+         href="#"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_1581_663" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32" style="mask-type: alpha;">
+            <rect width="32" height="32" fill="#D9D9D9"></rect>
+          </mask>
+          <g mask="url(#mask0_1581_663)">
+            <path
+              d="M20.2744 19.741L21.8077 14.2077L17.0744 10.941L15.541 16.4744L20.2744 19.741ZM5.34102 25.1077L4.24102 24.5744C3.55213 24.2855 3.08547 23.791 2.84102 23.091C2.59658 22.391 2.62991 21.6966 2.94102 21.0077L5.34102 15.8077V25.1077ZM10.6744 28.0077C9.94102 28.0077 9.31324 27.741 8.79102 27.2077C8.2688 26.6744 8.00769 26.041 8.00769 25.3077V17.341L11.5744 27.141C11.641 27.2966 11.6966 27.4466 11.741 27.591C11.7855 27.7355 11.8632 27.8744 11.9744 28.0077H10.6744ZM17.541 27.841C16.8521 28.0855 16.1632 28.0521 15.4744 27.741C14.7855 27.4299 14.3188 26.9299 14.0744 26.241L8.17435 9.94102C7.92991 9.25213 7.96324 8.5688 8.27435 7.89102C8.58546 7.21324 9.08546 6.75213 9.77435 6.50769L19.8077 2.84102C20.4966 2.59658 21.1799 2.62991 21.8577 2.94102C22.5355 3.25213 22.9966 3.75213 23.241 4.44102L29.1744 20.741C29.4188 21.4299 29.3855 22.1132 29.0744 22.791C28.7632 23.4688 28.2632 23.9299 27.5744 24.1744L17.541 27.841Z"
+              fill="#EEEEEE"
+            ></path>
+          </g>
+        </svg>
+          </a>
+        <a class="d-flex flex-column align-items-center"
+         href="#"><svg width="28" height="22" viewBox="0 0 28 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5141 16.3359L14.2474 13.5359L17.9141 16.3359L16.5141 11.8026L20.2474 8.86927H15.7141L14.2474 4.33594L12.7807 8.86927H8.2474L11.9141 11.8026L10.5141 16.3359ZM3.58073 21.6693C2.8474 21.6693 2.21962 21.4082 1.6974 20.8859C1.17517 20.3637 0.914062 19.7359 0.914062 19.0026V14.5026C0.914062 14.2582 0.99184 14.047 1.1474 13.8693C1.30295 13.6915 1.50295 13.5804 1.7474 13.5359C2.28073 13.3582 2.71962 13.0359 3.06406 12.5693C3.40851 12.1026 3.58073 11.5804 3.58073 11.0026C3.58073 10.4248 3.40851 9.90261 3.06406 9.43594C2.71962 8.96927 2.28073 8.64705 1.7474 8.46927C1.50295 8.42483 1.30295 8.31372 1.1474 8.13594C0.99184 7.95816 0.914062 7.74705 0.914062 7.5026V3.0026C0.914062 2.26927 1.17517 1.64149 1.6974 1.11927C2.21962 0.597049 2.8474 0.335938 3.58073 0.335938H24.9141C25.6474 0.335938 26.2752 0.597049 26.7974 1.11927C27.3196 1.64149 27.5807 2.26927 27.5807 3.0026V7.5026C27.5807 7.74705 27.503 7.95816 27.3474 8.13594C27.1918 8.31372 26.9918 8.42483 26.7474 8.46927C26.2141 8.64705 25.7752 8.96927 25.4307 9.43594C25.0863 9.90261 24.9141 10.4248 24.9141 11.0026C24.9141 11.5804 25.0863 12.1026 25.4307 12.5693C25.7752 13.0359 26.2141 13.3582 26.7474 13.5359C26.9918 13.5804 27.1918 13.6915 27.3474 13.8693C27.503 14.047 27.5807 14.2582 27.5807 14.5026V19.0026C27.5807 19.7359 27.3196 20.3637 26.7974 20.8859C26.2752 21.4082 25.6474 21.6693 24.9141 21.6693H3.58073ZM3.58073 19.0026H24.9141V15.6026C24.0918 15.1137 23.4418 14.4637 22.9641 13.6526C22.4863 12.8415 22.2474 11.9582 22.2474 11.0026C22.2474 10.047 22.4863 9.16372 22.9641 8.3526C23.4418 7.54149 24.0918 6.89149 24.9141 6.4026V3.0026H3.58073V6.4026C4.40295 6.89149 5.05295 7.54149 5.53073 8.3526C6.00851 9.16372 6.2474 10.047 6.2474 11.0026C6.2474 11.9582 6.00851 12.8415 5.53073 13.6526C5.05295 14.4637 4.40295 15.1137 3.58073 15.6026V19.0026Z" fill="#808080"></path></svg>
+          </a>
+        <a class="d-flex flex-column align-items-center"
+         href="#"><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" class=""><path d="M12.5 10.6667C13.2333 10.6667 13.8611 10.4056 14.3833 9.88333C14.9056 9.36111 15.1667 8.73333 15.1667 8C15.1667 7.26667 14.9056 6.63889 14.3833 6.11667C13.8611 5.59444 13.2333 5.33333 12.5 5.33333C11.7667 5.33333 11.1389 5.59444 10.6167 6.11667C10.0944 6.63889 9.83333 7.26667 9.83333 8C9.83333 8.73333 10.0944 9.36111 10.6167 9.88333C11.1389 10.4056 11.7667 10.6667 12.5 10.6667ZM5.83333 24V21.3333H11.1667V17.2C10.0778 16.9556 9.10556 16.4944 8.25 15.8167C7.39444 15.1389 6.76667 14.2889 6.36667 13.2667C4.7 13.0667 3.30556 12.3389 2.18333 11.0833C1.06111 9.82778 0.5 8.35556 0.5 6.66667V5.33333C0.5 4.6 0.761111 3.97222 1.28333 3.45C1.80556 2.92778 2.43333 2.66667 3.16667 2.66667H5.83333V0H19.1667V2.66667H21.8333C22.5667 2.66667 23.1944 2.92778 23.7167 3.45C24.2389 3.97222 24.5 4.6 24.5 5.33333V6.66667C24.5 8.35556 23.9389 9.82778 22.8167 11.0833C21.6944 12.3389 20.3 13.0667 18.6333 13.2667C18.2333 14.2889 17.6056 15.1389 16.75 15.8167C15.8944 16.4944 14.9222 16.9556 13.8333 17.2V21.3333H19.1667V24H5.83333ZM5.83333 10.4V5.33333H3.16667V6.66667C3.16667 7.51111 3.41111 8.27222 3.9 8.95C4.38889 9.62778 5.03333 10.1111 5.83333 10.4ZM12.5 14.6667C13.6111 14.6667 14.5556 14.2778 15.3333 13.5C16.1111 12.7222 16.5 11.7778 16.5 10.6667V2.66667H8.5V10.6667C8.5 11.7778 8.88889 12.7222 9.66667 13.5C10.4444 14.2778 11.3889 14.6667 12.5 14.6667ZM19.1667 10.4C19.9667 10.1111 20.6111 9.62778 21.1 8.95C21.5889 8.27222 21.8333 7.51111 21.8333 6.66667V5.33333H19.1667V10.4Z" fill="#808080"></path></svg>
+          </a>
+        <a class="d-flex flex-column align-items-center"
+         href="Streams.html"><svg width="28" height="22" viewBox="0 0 28 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4141 17.0026L19.7474 11.0026L10.4141 5.0026V17.0026ZM3.08073 21.6693C2.3474 21.6693 1.71962 21.4082 1.1974 20.8859C0.675174 20.3637 0.414062 19.7359 0.414062 19.0026V3.0026C0.414062 2.26927 0.675174 1.64149 1.1974 1.11927C1.71962 0.597049 2.3474 0.335938 3.08073 0.335938H24.4141C25.1474 0.335938 25.7752 0.597049 26.2974 1.11927C26.8196 1.64149 27.0807 2.26927 27.0807 3.0026V19.0026C27.0807 19.7359 26.8196 20.3637 26.2974 20.8859C25.7752 21.4082 25.1474 21.6693 24.4141 21.6693H3.08073ZM3.08073 19.0026H24.4141V3.0026H3.08073V19.0026Z" fill="#808080"></path></svg>
+          </a>
+        <a class="d-flex flex-column align-items-center"
+         href="#"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class=""><path d="M4.8276 17.9526C5.81927 17.1943 6.9276 16.5964 8.15261 16.1589C9.37761 15.7214 10.6609 15.5026 12.0026 15.5026C13.3443 15.5026 14.6276 15.7214 15.8526 16.1589C17.0776 16.5964 18.1859 17.1943 19.1776 17.9526C19.8582 17.1554 20.388 16.2512 20.7672 15.2401C21.1464 14.229 21.3359 13.1498 21.3359 12.0026C21.3359 9.41649 20.4269 7.21441 18.6089 5.39635C16.7908 3.5783 14.5887 2.66927 12.0026 2.66927C9.41649 2.66927 7.21441 3.5783 5.39635 5.39635C3.5783 7.21441 2.66927 9.41649 2.66927 12.0026C2.66927 13.1498 2.85885 14.229 3.23802 15.2401C3.61719 16.2512 4.14705 17.1554 4.8276 17.9526ZM12.0026 13.1693C10.8554 13.1693 9.88802 12.7755 9.10052 11.988C8.31302 11.2005 7.91927 10.2332 7.91927 9.08594C7.91927 7.93872 8.31302 6.97135 9.10052 6.18386C9.88802 5.39635 10.8554 5.0026 12.0026 5.0026C13.1498 5.0026 14.1172 5.39635 14.9047 6.18386C15.6922 6.97135 16.0859 7.93872 16.0859 9.08594C16.0859 10.2332 15.6922 11.2005 14.9047 11.988C14.1172 12.7755 13.1498 13.1693 12.0026 13.1693ZM12.0026 23.6693C10.3887 23.6693 8.87205 23.363 7.4526 22.7505C6.03316 22.138 4.79844 21.3068 3.74844 20.2568C2.69844 19.2068 1.86719 17.972 1.25469 16.5526C0.642188 15.1332 0.335938 13.6165 0.335938 12.0026C0.335938 10.3887 0.642188 8.87205 1.25469 7.4526C1.86719 6.03316 2.69844 4.79844 3.74844 3.74844C4.79844 2.69844 6.03316 1.86719 7.4526 1.25469C8.87205 0.642188 10.3887 0.335938 12.0026 0.335938C13.6165 0.335938 15.1332 0.642188 16.5526 1.25469C17.972 1.86719 19.2068 2.69844 20.2568 3.74844C21.3068 4.79844 22.138 6.03316 22.7505 7.4526C23.363 8.87205 23.6693 10.3887 23.6693 12.0026C23.6693 13.6165 23.363 15.1332 22.7505 16.5526C22.138 17.972 21.3068 19.2068 20.2568 20.2568C19.2068 21.3068 17.972 22.138 16.5526 22.7505C15.1332 23.363 13.6165 23.6693 12.0026 23.6693ZM12.0026 21.3359C13.0332 21.3359 14.0054 21.1852 14.9193 20.8839C15.8332 20.5825 16.6693 20.1498 17.4276 19.5859C16.6693 19.022 15.8332 18.5894 14.9193 18.288C14.0054 17.9866 13.0332 17.8359 12.0026 17.8359C10.972 17.8359 9.99983 17.9866 9.08594 18.288C8.17205 18.5894 7.33594 19.022 6.5776 19.5859C7.33594 20.1498 8.17205 20.5825 9.08594 20.8839C9.99983 21.1852 10.972 21.3359 12.0026 21.3359ZM12.0026 10.8359C12.5082 10.8359 12.9262 10.6707 13.2568 10.3401C13.5873 10.0095 13.7526 9.59149 13.7526 9.08594C13.7526 8.58038 13.5873 8.16233 13.2568 7.83177C12.9262 7.50122 12.5082 7.33594 12.0026 7.33594C11.497 7.33594 11.079 7.50122 10.7484 7.83177C10.4179 8.16233 10.2526 8.58038 10.2526 9.08594C10.2526 9.59149 10.4179 10.0095 10.7484 10.3401C11.079 10.6707 11.497 10.8359 12.0026 10.8359Z" fill="#808080"></path></svg>
+          </a>
+        
+        
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
