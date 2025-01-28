@@ -131,7 +131,13 @@
       button:focus {
         outline: 2px solid #5efc8d;
       }
-      
+      .tab {
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  border-bottom: 2px solid #5efc8d !important;
+}
     </style>
   </head>
   <body style="background-color: #121212">
@@ -182,29 +188,35 @@
           <div class="d-flex justify-content-between px-2">
             <div class="flex-grow overflow-auto">
               <div class="d-flex justify-content-between px-2">
-               <a href="live.html"><button 
-                  class="py-2 px-4 border-0 border-bottom bg-transparent fw-medium text-white" 
-                  style="border-bottom: 2px solid #5efc8d !important;">
-                  Live
-                </button> </a> 
+                <a href="live.html">
+                  <button 
+                    id="liveTab"
+                    class="tab py-2 px-4 border-0 bg-transparent fw-medium text-white">
+                    Live
+                  </button>
+                </a>
               </div>
             </div>
             <div class="flex-grow overflow-auto">
               <div class="d-flex justify-content-between px-2">
-               <a href="Learning.html"> <button 
-                  class="py-2 px-4 border-0 border-bottom bg-transparent fw-medium text-white" 
-                  style="border-bottom: 2px solid #5efc8d !important;">
-                  Learning
-                </button> </a>
-              </div>   
+                <a href="learning.html">
+                  <button 
+                    id="learningTab"
+                    class="tab py-2 px-4 border-0 bg-transparent fw-medium text-white">
+                    Learning
+                  </button>
+                </a>
+              </div>
             </div>
             <div class="flex-grow overflow-auto">
               <div class="d-flex justify-content-between px-2">
-              <a href="vod.html">  <button 
-                  class="py-2 px-4 border-0 border-bottom bg-transparent fw-medium text-white" 
-                  style="border-bottom: 2px solid #5efc8d !important;">
-                  VOD
-                </button> </a>
+                <a href="vod.html">
+                  <button 
+                    id="vodTab"
+                    class="tab py-2 px-4 border-0 bg-transparent fw-medium text-white">
+                    VOD
+                  </button>
+                </a>
               </div>
             </div>
           </div>
@@ -246,7 +258,26 @@
     </div>
     
     </div>
-    
+     <script>
+      // Get all tab elements
+const tabs = document.querySelectorAll('.tab');
+
+// Get the current URL path
+const currentPath = window.location.pathname;
+
+// Map each tab to its corresponding page
+tabs.forEach(tab => {
+  const tabLink = tab.parentElement.getAttribute('href'); // Get the href attribute of the parent <a>
+
+  // If the current URL matches the tab's href, add the active class
+  if (currentPath.endsWith(tabLink)) {
+    tab.classList.add('active');
+  } else {
+    tab.classList.remove('active');
+  }
+});
+
+     </script>
 
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
